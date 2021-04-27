@@ -1,6 +1,6 @@
 # learn-vue
 
-vue 源码全方位深入解析(2-14 章节)
+vue 源码全方位深入解析(3-4 章节 6-3 章节没看)
 vue 源码学习
 http://caibaojian.com/vue-design/art/(vue技术内幕)
 
