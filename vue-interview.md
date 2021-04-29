@@ -87,6 +87,8 @@ Mvvm 作为绑定的入口,整合 Observer,compile 和 watcher 三者,通过 Obs
 
 ## keep-alive 原理
 
+在 created 的时候将需要缓存的 vnode 节点放到 cache 中在 render 的时候根据 name 进行取出
+
 ## nextTick 原理
 
 ## vue-router 原理
