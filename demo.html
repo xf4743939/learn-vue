@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue 学习</title>
+  <script src="./vue-dev/dist/vue.js"></script>
+</head>
+<body>
+ 
+  <div id="app">{{message}}
+   
+    <button @click="handleClick">click me</button>
+  </div>
+  <script>
+   
+    const app =new Vue({
+      el:'#app',
+      data(){
+        return{
+          message:'sss'
+        }
+      },
+    created(){
+       console.log(this);
+    },
+
+      // render(createElement){
+      //   return createElement('div',{
+      //       attrs:{
+      //         id:"#app2"
+      //       }
+      //    },this.message)
+      // },
+      computed:{
+        say(){
+          setTimeout(()=>{
+            this.message = 'I start'
+          },1000)
+          return this.message + 'vue'
+        }
+      },
+      methods:{
+        handleClick(){
+          setTimeout(()=>{
+            this.message = 'I start'
+          },1000)
+          console.log('click me')
+        }
+      }
+      
+    })
+  </script>
+</body>
+</html>

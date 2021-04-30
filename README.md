@@ -3,7 +3,7 @@
 vue 源码全方位深入解析(3-4 章节 6-3 章节看完)
 vue 源码学习
 http://caibaojian.com/vue-design/art/(vue技术内幕)
-B 站尚硅谷 21 章看完
+B 站尚硅谷 25 章开始
 
 ## new Vue 发生了什么
 
@@ -134,6 +134,15 @@ h("a", { props: { href: "http://www.baidu.com" } }, "百度");
   3. 判断 OldNode 和 newNode 是不是同一个虚拟节点
   4. 不是:暴力删除旧的,插入新的
   5. 是:精细化比较
+  6. 判断是同一个对象:什么都不做
+  7. 判断 newVnode 有没有 text 属性
+  8. 有 text 属性 判断 oldVnode 和 newVnode 的 text 是不是相同
+  9. 是相同就什么都不做
+  10. 不相同就把 elm 中的 innerText 改变为 newVnode 的 text(即使 oldVnode 有 children 属性而没有 text 属性,那么也没事了,innerText 一旦改为新的 text,老的 children 就没了)
+  11. 新节点没有 text 属性(新节点没有 text 就有 children);判断 oldVnode 有没有 Children
+  12. 旧节点没有 children(没有 children 就意味这有 text)
+  13. 清空 oldVnode 中 text,并且把 newVnode 中 children 添加到 Dom 中
+  14. oldVnode 有 children(新老都有 children)
 
 ```js
 // 如何定义是不是同一个节点
