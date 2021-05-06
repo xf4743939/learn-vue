@@ -1,5 +1,19 @@
 # vue 面试题整理
 
+前端框架面试 vue/react(第三章看完)
+
+## vue 初次渲染过程
+
+- 解析模板为 render 函数
+- 触发响应式,触发响应式,监听 data 属性 getter,setter
+- 执行 render 函数(会触发 getter),生成 vnode,path(elem,vnode)
+
+## 更新过程
+
+- 修改 data,触发 setter
+- 重新执行 render 函数,生产 newVnode
+- patch(vnode,newVnode)
+
 ## 说说 SSR
 
 vue.js 是构建客户端应用程序的框架.默认情况下，可以在浏览器中输出 Vue 组件，进行生成 DOM 和操作 DOM。
@@ -87,11 +101,25 @@ Mvvm 作为绑定的入口,整合 Observer,compile 和 watcher 三者,通过 Obs
 
 ## keep-alive 原理
 
-在 created 的时候将需要缓存的 vnode 节点放到 cache 中在 render 的时候根据 name 进行取出
+在 created 函数调用的时候将需要缓存的 vnode 节点放到 this.cache 中在 render(页面渲染)的时候。如果 Vnode 中 name 符合缓存条件(可以用 include 以及 exclude 控制),则会从 this.cache 中取出之前缓存的 Vnode 实列进行渲染
+max 定义缓存组件上限,超出上限使用 LRU 的策略置换缓存数据
+内存管理的一种页面置换算法,对于在内存中但又不用的数据快(内存快)叫做 LRU,操作系统会根据哪些数据属于 LRU 而将其移除内存而腾出空间而加载另外的数据。
+
+```js
+  // render 函数
+  render(){}
+```
 
 ## nextTick 原理
 
 ## vue-router 原理
+
+- hash 特点(onhashchange)
+  - hash 变化出触发网页跳转,即浏览器的前进、后退
+  - hash 变化不会刷新页面,SPA 必需的特点
+  - hash 永远不会提交到 server 端(前端自身自灭)
+- history(onpopstate)
+  - history.pushState
 
 ## vuex 原理
 
@@ -102,3 +130,38 @@ Mvvm 作为绑定的入口,整合 Observer,compile 和 watcher 三者,通过 Obs
 ## Vue 源码解析之指令和生命周期
 
 ## vue3 源码解析
+
+## vue 高级特性
+
+- 自定义 v-model
+- $nextTick
+- slot
+- 动态、异步组件
+- keep-alive
+  频繁切换,不需要重复渲染
+- mixin
+  多个组件有相同的逻辑,抽离出来
+  mixin 的问题
+
+1. 变量来源不明确,不利于阅读
+2. 多 mixin 可能造成命名冲突
+3. mixin 和组件可能出现多不多的关系,复杂度较高
+
+## vue3 与 vue2 对比
+
+- 性能比 vue2.x 快 1.2 倍
+- 按需编译,体积比 vue2.x 更小
+- 组合 api
+- 更好支持 TS
+- 暴露了自定义渲染 API
+- Fragment、Teleport、suspense 更先进的组件
+- diff 方法优化
+  vue2 虚拟 dom 是进行全量的对比;vue3 新增了静态标记(patchFlag)
+- hoistStatic 静态提升
+  - vue2 中无论元素是否参与更新,每次都会重新创建,然后在渲染
+  - vue3 中对于不参与更新的元素,会做静态提升,只会被创建一次,在渲染时直接复用即可
+- 事件侦听器缓存
+- vue2 defineProperty 缺点
+  - 深度监听,需要递归到底,一次性计算量大
+  - 无法监听新增属性/删除属性(vue.set、vue.delete)
+  - 无法原生监听数组,需要特殊处理
