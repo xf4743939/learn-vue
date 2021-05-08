@@ -165,3 +165,4 @@ max 定义缓存组件上限,超出上限使用 LRU 的策略置换缓存数据
   - 深度监听,需要递归到底,一次性计算量大
   - 无法监听新增属性/删除属性(vue.set、vue.delete)
   - 无法原生监听数组,需要特殊处理
+- 支持Fargments、portals、suspense 
