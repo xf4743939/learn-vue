@@ -165,3 +165,15 @@ max 定义缓存组件上限,超出上限使用 LRU 的策略置换缓存数据
   - 深度监听,需要递归到底,一次性计算量大
   - 无法监听新增属性/删除属性(vue.set、vue.delete)
   - 无法原生监听数组,需要特殊处理
+
+## 如何理解 MVC MVVM MPP
+
+- MVC
+  - 分层架构,职责清晰,代码易维护
+  - 前端页面开发效率不高;前后端职责不清
+- MVP
+  MVP 和 MVC 很接近,p 只 Presenter,它负责 view 和 model 直接的数据流动,防止 view 和 Model 直接直接交流。可以看出 presenter 负责 model 进行双向交互,还和 view 进行双向交互,随着应用程序体积增大,导致 presenter 体积增大,难以维护.
+- MVVM
+  viewModel 通过一套数据响应式机制自动响应 Model 中数据变化;同时 viewModel 会实现一套更新策略自动化将数据变化转换为视图更新;通过事件监听响应 view 用户交互修改 Model 中数据.这样在 viewModel 中减少了大量 DOM 操作代码。MVVM 保持 view 和 Model 松耦合的同时,还减少维护它们关系的代码,使用户专注于业务逻辑，兼顾开发效率和可维护性。
+
+## vue 组件化理解
