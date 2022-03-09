@@ -46,7 +46,7 @@ function createrGetter(isReadonly=false,shallow =false){
      
      if(!isReadonly){
          // 收集依赖,等会数据变化后更新对应视图
-         track(track,TrackOpTypes.GET,key)
+         track(target,TrackOpTypes.GET,key)
      }
       // 如果是浅对象就可以直接返回原对象，不需要proxy 包裹
      if(shallow){
